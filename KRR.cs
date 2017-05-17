@@ -16,9 +16,6 @@ namespace ConsoleApplication2
 
         }
 
-       
-
-
         public void PerformAction()
         {
             
@@ -41,33 +38,66 @@ namespace ConsoleApplication2
 
         }
 
-
-
-        public bool IsTrue()
+        public override bool Equals(object obj)
         {
-            if ()
+            if (obj is Fluent)
             {
-                return true;
+                var fluent = obj as Fluent;
+                if (Name.Equals(fluent.Name)) return true;
             }
             return false;
         }
 
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+
+            return Name;
+        }
     }
 
+    public class Action 
+    {
+        public string Name;
 
-        public class Action
-        {
-            public string Name;
         public Action() { }
 
-
-        public void AddAction()
+        public Action(string name)
         {
-            var list = new List<String>() { "Move", "Hit" };
+            Name = name;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj is Action)
+            {
+                var action = obj as Action;
+                if (action.Name.Equals(this.Name))
+                    return true;
+            }
+            return false;
+        }
+
+        public object Clone()
+        {
+            Action Act = new Action();
+            Act.Name = Name;
+            return Act;
+        }
+
+        public override string ToString()
+        {
+            return "(" + this.Name + ")";
+        }
     }
 
-    
 
-        }
+
+
+
+
+}
